@@ -2,9 +2,10 @@
 # mostly just messing around with the os module
 
 def main():
-    print('wow, nice to meet you, world')
+    home_dir = '/home/kg'
     output = f'''
-get_dir_info: {get_dir_info()}
+get_dir_info(): {get_dir_info()}
+get_dir_info(home_dir): {get_dir_info(home_dir)}
 where_am_i: {where_am_i()}
 get_my_proc_info: {get_my_proc_info()}
     '''
@@ -12,17 +13,13 @@ get_my_proc_info: {get_my_proc_info()}
 
 def where_am_i():
     import os
-    where = {}
-    return where
+    return {'cwd': os.getcwd()}
 
-def get_dir_info():
+def get_dir_info(dir=''):
     import os
+    dir = os.getcwd() if dir == '' else dir
     dir_info = {}
-    dir_info.update({'cwd': os.getcwd()})
-    dir_info.update({'egid': os.getegid()})
-    dir_info.update({'euid': os.geteuid()})
-    dir_info.update({'uname': os.uname()})
-    dir_info.update({'ls': os.listdir(dir_info['cwd'])})
+    dir_info.update({'ls': os.listdir(dir)})
     return dir_info
 
 def get_my_proc_info():
